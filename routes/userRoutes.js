@@ -11,4 +11,11 @@ router.get('/search', (req, res) => {
     res.send(`Search query: ${req.query.q}`);
 });
 
+// example of a middleware function
+router.use((req, res, next) => {
+    console.log(`Request URL: ${req.url}.   Time: ${new Date()}`);
+    next();
+});
+
+// commonjs syntax to export the router (configured in package.json "type": "commonjs")
 module.exports = router;
