@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+// home page
+router.get('/home', (req, res) => {
+    res.render('home');
+});
+
 // example of a route parameter
 router.get('/users/:id', (req, res) => {
     res.send(`User ID: ${req.params.id}`);
@@ -11,7 +16,7 @@ router.get('/search', (req, res) => {
     res.send(`Search query: ${req.query.q}`);
 });
 
-// example of a middleware function
+// example of a middleware function (notice *.use() and next())
 router.use((req, res, next) => {
     console.log(`Request URL: ${req.url}.   Time: ${new Date()}`);
     next();

@@ -1,10 +1,18 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8000;
+const ejs = require('ejs');
 
 const userRoutes = require('./routes/userRoutes');
 
-//middleware
+//view engine
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+//global middleware
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ exended: true }));
 app.use(userRoutes);
 
 //route handler
