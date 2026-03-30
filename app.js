@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 8000;
 const ejs = require('ejs');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
+const uri = process.env.MONGO_URI;
+const port = process.env.PORT || 8000;
+
 
 const userRoutes = require('./routes/userRoutes');
 
@@ -20,7 +25,16 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-//server setup
-app.listen(port, () => {
+//connect to MongoDB
+mongoose.connect(uri).then(async() => {
+    
+    console.log('Connected to MongoDB');
+
+    //server setup
+    app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+    });
+
+}).catch((err) => {
+    console.log(`Error connecting to MongoDB ${err}`);
 });
