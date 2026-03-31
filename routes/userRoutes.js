@@ -3,7 +3,8 @@ const router = express.Router();
 
 // home page
 router.get('/home', (req, res) => {
-    res.render('home');
+    let user = "Gage";
+    res.render('home', {user});
 });
 
 // example of a route parameter

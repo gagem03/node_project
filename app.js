@@ -25,6 +25,14 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+//put in browser localhost:8000/json-response
+app.get('/json-response', (req, res) => {
+    const data = {
+        name: "John Doe",
+    }
+    res.json(data);
+});
+
 //connect to MongoDB
 mongoose.connect(uri).then(async() => {
     
