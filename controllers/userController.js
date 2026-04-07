@@ -23,3 +23,5 @@ async function createUser(req, res) {
         res.status(500).json({"Internal Server Error": error.message});
     }
 }
+
+module.exports = {createUser};

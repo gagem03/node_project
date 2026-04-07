@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../controllers/userController');
 
 // home page
 router.get('/home', (req, res) => {
     let user = "Gage";
     res.render('home', {user});
 });
+
+//this route will link the createUser function to route handler
+router.post('/users', userController.createUser);
 
 // example of a route parameter
 router.get('/users/:id', (req, res) => {
