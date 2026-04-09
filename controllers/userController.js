@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 const User = require('../models/userModel.js');
+const bcrypt = require('bcrypt');
 
 async function createUser(req, res) {
     try {
+
+        const hashed_password = await bcrypt.hash(req.body.password, 10);
+
         //create a new user
         const newUser = {
             first_name: req.body.first_name,
             username : req.body.username,
+            password : hashed_password,
             email: req.body.email
         };
 
@@ -17,8 +22,8 @@ async function createUser(req, res) {
         await user.save();
 
         //send a response to the client
-        res.status(201).json({"User created successfully": user});
-
+        return res.status(201).json({"User created successfully": user});
+        
     } catch(error) {
         res.status(500).json({"Internal Server Error": error.message});
     }
